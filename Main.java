@@ -22,7 +22,8 @@ public class Main {
 
         for (int x = 0; x < imageWidth; x++) {
             for (int y = 0; y < imageHeight; y++) {
-
+                
+                // extracts the color
                 int rgb = image.getRGB(x,y);
 
                 int alpha = (rgb>>24)&0xff;
@@ -33,10 +34,12 @@ public class Main {
                 int r = 255,g = 255, b = 255;
 
                 if (red == r && green == g && blue == b) {
+                    // if the color r,g,b is found, we will keep it in a new image
                     rgb = (alpha<<24) | (red<<16) | (green<<8) | blue;
                     image.setRGB(x, y, rgb);
                 }
                 else {
+                    // if the color r,g,b isn't found, we will replace it with the color black
                     rgb = (alpha<<24) | (0<<16) | (0<<8) | 0;
                     image.setRGB(x, y, rgb);
                 }
@@ -44,6 +47,7 @@ public class Main {
         }
 
         try {
+            // creates a new file
             file = new File("IsolatedImage." + fileFormat);
             file.createNewFile();
 
